@@ -1,0 +1,249 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+@import "@fontsource/dancing-script/index.css"; /* 导入 Dancing Script 字体 */
+
+:root {
+  --background: #ffffff;
+  --foreground: #171717;
+  --primary: #3b82f6;
+  --primary-hover: #2563eb;
+  --secondary: #10b981;
+  --secondary-hover: #059669;
+  --accent: #8b5cf6;
+  --accent-hover: #7c3aed;
+  --gray-50: #f9fafb;
+  --gray-100: #f3f4f6;
+  --gray-200: #e5e7eb;
+  --gray-300: #d1d5db;
+  --gray-400: #9ca3af;
+  --gray-500: #6b7280;
+  --gray-600: #4b5563;
+  --gray-700: #374151;
+  --gray-800: #1f2937;
+  --gray-900: #111827;
+  --radius-sm: 0.375rem;
+  --radius-md: 0.75rem;
+  --radius-lg: 1rem;
+  --radius-xl: 1.5rem;
+  --radius-2xl: 2rem;
+  --radius-full: 9999px;
+  --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+}
+
+body {
+  color: var(--foreground);
+  background: var(--background);
+  font-family: 'Noto Sans SC', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* 自定义滚动条 */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--gray-100);
+  border-radius: var(--radius-full);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--gray-400);
+  border-radius: var(--radius-full);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--gray-500);
+}
+
+/* 自定义动画 */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes slideInLeft {
+  from { opacity: 0; transform: translateX(-20px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes slideDown {
+  from { opacity: 0; max-height: 0; transform: translateY(-10px); }
+  to { opacity: 1; max-height: 300px; transform: translateY(0); }
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.7; }
+}
+
+@keyframes typing {
+  from { opacity: 0; transform: translateY(5px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* 打字机效果动画 */
+@keyframes typewriter {
+  from { width: 0; }
+  to { width: 100%; }
+}
+
+@keyframes blinkCursor {
+  from, to { border-right-color: transparent; }
+  50% { border-right-color: var(--gray-800); }
+}
+
+.animate-fadeIn { animation: fadeIn 0.4s ease-out; }
+.animate-slideIn { animation: slideInLeft 0.3s ease-out; }
+.animate-slideDown { animation: slideDown 0.3s ease-out; }
+.animate-pulse { animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite; }
+.animate-typing { 
+  animation: typing 0.15s ease-out;
+  animation-fill-mode: both;
+}
+
+/* 逐字打字机效果样式 */
+.typewriter-char {
+  display: inline-block;
+  opacity: 0;
+  animation: typing 0.05s ease-out forwards;
+}
+
+.typewriter-cursor {
+  display: inline-block;
+  width: 2px;
+  height: 1em;
+  background-color: var(--gray-800);
+  margin-left: 1px;
+  animation: blinkCursor 0.7s infinite;
+  vertical-align: middle;
+}
+
+/* 自定义组件样式 */
+.menu-item {
+  @apply py-3 px-5 flex items-center cursor-pointer transition-all duration-200 rounded-xl my-1 mx-2;
+  user-select: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+}
+
+.menu-icon {
+  @apply w-8 h-8 flex items-center justify-center mr-3 text-gray-500 transition-colors duration-200;
+}
+
+.menu-text {
+  @apply text-gray-700 text-base font-medium transition-colors duration-200;
+}
+
+/* 菜单项悬停和激活效果 */
+.menu-item:hover, .menu-item.active {
+  @apply bg-blue-50;
+}
+
+.menu-item:hover .menu-icon, .menu-item.active .menu-icon {
+  @apply text-blue-600;
+}
+
+.menu-item:hover .menu-text, .menu-item.active .menu-text {
+  @apply text-blue-600;
+}
+
+.menu-item.active .menu-text {
+  @apply font-semibold;
+}
+
+/* 下拉菜单样式 */
+.submenu {
+  @apply ml-8 overflow-hidden;
+  animation: slideDown 0.3s ease-out;
+}
+
+.submenu .menu-item {
+  @apply py-2 px-4;
+}
+
+.card {
+  @apply bg-white rounded-2xl border border-gray-100 shadow-sm hover:shadow-md transition-all duration-300 transform hover:-translate-y-1 overflow-hidden;
+}
+
+.btn-primary {
+  @apply bg-blue-600 hover:bg-blue-700 text-white px-5 py-2.5 rounded-xl flex items-center justify-center text-sm font-medium transition-all duration-200 shadow-sm hover:shadow focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50;
+  user-select: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+}
+
+.btn-secondary {
+  @apply bg-gray-100 hover:bg-gray-200 text-gray-800 px-5 py-2.5 rounded-xl flex items-center justify-center text-sm font-medium transition-all duration-200 shadow-sm hover:shadow focus:ring-2 focus:ring-gray-300 focus:ring-opacity-50;
+  user-select: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+}
+
+.btn-outline {
+  @apply border border-gray-300 hover:border-gray-400 bg-transparent text-gray-700 hover:bg-gray-50 px-5 py-2.5 rounded-xl flex items-center justify-center text-sm font-medium transition-all duration-200 shadow-sm hover:shadow focus:ring-2 focus:ring-gray-300 focus:ring-opacity-50;
+  user-select: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+}
+
+.section-title {
+  @apply text-2xl font-bold text-gray-800 mb-6 tracking-wide;
+}
+
+.badge {
+  @apply inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium;
+  user-select: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+}
+
+.badge-blue { @apply bg-blue-100 text-blue-800; }
+.badge-green { @apply bg-green-100 text-green-800; }
+.badge-purple { @apply bg-purple-100 text-purple-800; }
+.badge-yellow { @apply bg-yellow-100 text-yellow-800; }
+
+.input {
+  @apply w-full px-4 py-2.5 text-gray-700 bg-white border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200;
+}
+
+.glass-effect {
+  @apply bg-white bg-opacity-70 backdrop-blur-md border border-white border-opacity-20 shadow-sm rounded-2xl;
+}
+
+/* 回退按钮样式 */
+.back-button {
+  @apply mr-3 bg-white hover:bg-gray-100 text-gray-700 p-2 rounded-full shadow-sm transition-all duration-200 flex items-center justify-center hover:scale-110 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50;
+  user-select: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+}
+
+.back-button .material-icons {
+  @apply text-xl transition-colors duration-200;
+}
+
+.back-button:hover .material-icons {
+  @apply text-blue-600;
+}
+
+@media (max-width: 640px) {
+  .back-button {
+    @apply p-1.5;
+  }
+  
+  .back-button .material-icons {
+    @apply text-lg;
+  }
+}
